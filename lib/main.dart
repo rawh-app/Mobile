@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:   Container(child: Center(child: Text('data now122'),),),
+      home:   Container(child: Center(child: Text('data now12'),),),
     );
   }
 }
