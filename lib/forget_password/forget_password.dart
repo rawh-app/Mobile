@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rawh/code_screen/code_screen.dart';
 import 'package:rawh/login_screen/widgets/custom_text_field.dart';

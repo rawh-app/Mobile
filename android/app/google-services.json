@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "438966907007",
+    "project_id": "rawh-e95ce",
+    "storage_bucket": "rawh-e95ce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438966907007:android:e66e1f8218200dfc430f4a",
+        "android_client_info": {
+          "package_name": "com.example.rawh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKnsSTz-C5AqftNrnWKYLf7m4vMfjZWpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
