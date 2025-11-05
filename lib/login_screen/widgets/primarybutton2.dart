@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class PrimaryButton extends StatelessWidget {
+class PrimaryButton2 extends StatelessWidget {
   final String text;
-  final VoidCallback? onPressed;
-  const PrimaryButton({super.key, required this.text, required this.onPressed});
+  final Future<void> Function() onPressed;
+
+  const PrimaryButton2({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +12,8 @@ class PrimaryButton extends StatelessWidget {
       width: double.infinity,
       height: 55,
       child: ElevatedButton(
-        onPressed:()async{
-          await onPressed;
+        onPressed: () async {
+          await onPressed(); // 🟢 نداء الدالة الصحيح
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2874B9),
@@ -32,5 +33,3 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 }
-
-

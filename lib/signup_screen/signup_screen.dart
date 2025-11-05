@@ -1,19 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../login_screen/widgets/custom_outlined_Button.dart';
 import '../login_screen/widgets/custom_text_field.dart';
 import '../login_screen/widgets/primary_button.dart';
+import 'controllers/data_controller.dart';
 import 'controllers/ui_controllers.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
 
-  // ✅ instantiate controller
-  final SignupController controller = Get.put(SignupController());
+  // 🟢 Controllers
+  final SignupController uiController = Get.put(SignupController()); // UI controller
+  final SignUpController apiController = Get.put(SignUpController()); // API controller
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -41,7 +41,7 @@ class SignupScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "تسجيل الدخول ",
+                    "إنشاء حساب",
                     style: GoogleFonts.tajawal(
                       fontSize: 23,
                       fontWeight: FontWeight.w800,
@@ -52,16 +52,17 @@ class SignupScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "سجل دخولك الآن وابدأ رحلة التأهيل !",
+                    "سجل حسابك الآن وابدأ رحلتك !",
                     style: GoogleFonts.tajawal(
                       fontSize: 15,
-                      color: Color(0xff989898),
+                      color: const Color(0xff989898),
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
 
+                // 🟢 Username field
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -79,6 +80,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
+                // 🟢 Email field
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -96,6 +98,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
+                // 🟢 Password field with visibility toggle
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -108,26 +111,51 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 7),
 
-                /// ✅ Use Obx to rebuild when password visibility changes
                 Obx(
                       () => CustomTextField(
                     controller: _passwordController,
                     hintText: '********',
-                    obscureText: controller.isPasswordHidden.value,
+                    obscureText: uiController.isPasswordHidden.value,
                     suffixIcon: IconButton(
                       icon: Icon(
-                        controller.isPasswordHidden.value
+                        uiController.isPasswordHidden.value
                             ? Icons.visibility_off_outlined
                             : Icons.visibility_outlined,
                         color: Colors.grey[600],
                       ),
-                      onPressed: controller.togglePasswordVisibility,
+                      onPressed: uiController.togglePasswordVisibility,
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
 
-                PrimaryButton(onPressed: () {}, text: "إنشاء حساب"),
+                // 🟢 Signup button
+                Obx(() {
+                  if (apiController.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.blue),
+                    );
+                  }
+
+                  return PrimaryButton(
+                    text: "إنشاء حساب",
+                    onPressed: () async {
+                      await apiController.signUp(
+                        email: _emailController.text,
+                        username: _usernameController.text,
+                        password: _passwordController.text,
+                      );
+
+                      Get.snackbar(
+                        "الحالة",
+                        apiController.message.value,
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.white,
+                        colorText: Colors.black,
+                      );
+                    },
+                  );
+                }),
                 const SizedBox(height: 5),
 
                 Row(
@@ -168,6 +196,7 @@ class SignupScreen extends StatelessWidget {
                   onPressed: () {},
                 ),
                 const SizedBox(height: 20),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
