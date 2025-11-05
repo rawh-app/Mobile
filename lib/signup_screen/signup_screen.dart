@@ -1,46 +1,49 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rawh/login_screen/widgets/custom_text_field.dart';
-import 'package:rawh/login_screen/widgets/primary_button.dart';
-import 'package:rawh/login_screen/widgets/custom_outlined_Button.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+import '../login_screen/widgets/custom_outlined_Button.dart';
+import '../login_screen/widgets/custom_text_field.dart';
+import '../login_screen/widgets/primary_button.dart';
+import 'controllers/ui_controllers.dart';
 
-  @override
-  State<SignupScreen> createState() => _SignupScreenState();
-}
+class SignupScreen extends StatelessWidget {
+  SignupScreen({super.key});
 
-class _SignupScreenState extends State<SignupScreen> {
+  // ✅ instantiate controller
+  final SignupController controller = Get.put(SignupController());
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
-  bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        backgroundColor: Color(0xffF3F9FF),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+        resizeToAvoidBottomInset: true,
+        backgroundColor: const Color(0xffF3F9FF),
+        body: SafeArea(
           child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Image.asset('assets/logo.png', height: 90),
                 ),
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     "تسجيل الدخول ",
                     style: GoogleFonts.tajawal(
                       fontSize: 23,
-
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -53,19 +56,18 @@ class _SignupScreenState extends State<SignupScreen> {
                     style: GoogleFonts.tajawal(
                       fontSize: 15,
                       color: Color(0xff989898),
-
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
+
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
                     'اسم المستخدم',
                     style: GoogleFonts.tajawal(
                       fontSize: 16,
-
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -83,7 +85,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     'البريد الإلكتروني',
                     style: GoogleFonts.tajawal(
                       fontSize: 16,
-
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -94,6 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   hintText: 'rawhapp@example.com',
                 ),
                 const SizedBox(height: 20),
+
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -105,25 +107,26 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 const SizedBox(height: 7),
-                CustomTextField(
-                  controller: _passwordController,
-                  hintText: '********',
-                  obscureText: _obscureText,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText
-                          ? Icons.visibility_off_outlined
-                          : Icons.visibility_outlined,
-                      color: Colors.grey[600],
+
+                /// ✅ Use Obx to rebuild when password visibility changes
+                Obx(
+                      () => CustomTextField(
+                    controller: _passwordController,
+                    hintText: '********',
+                    obscureText: controller.isPasswordHidden.value,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.isPasswordHidden.value
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: Colors.grey[600],
+                      ),
+                      onPressed: controller.togglePasswordVisibility,
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
                   ),
                 ),
                 const SizedBox(height: 20),
+
                 PrimaryButton(onPressed: () {}, text: "إنشاء حساب"),
                 const SizedBox(height: 5),
 
@@ -145,6 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                 ),
                 const SizedBox(height: 15),
+
                 Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -156,18 +160,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
 
                 customoutlinedButton(
                   imagePath: 'assets/Google.png',
-
                   text: 'المتابعة باستخدام جوجل',
                   onPressed: () {},
                 ),
-
                 const SizedBox(height: 20),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
