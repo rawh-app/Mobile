@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:rawh/login_screen/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,32 +15,33 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    /* Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const PageviewScreen()),
-      );
-    });*/
+    Future.delayed(const Duration(seconds: 1), () {
+      Get.off(LoginScreen());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff123655),
-      body: Center(
-        child: Align(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              Image.asset('assets/logo.png', width: 100, height: 100),
-              const SizedBox(height: 20),
-              const Text(
-                "RAWH",
-                style: TextStyle(letterSpacing: 20, color: Colors.white),
+      backgroundColor: const Color(0XFF123655),
+      body: SizedBox(
+        width: 500,
+        height: 600,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logo.png', height: 100),
+            const SizedBox(height: 30),
+            Text(
+              'RAWH',
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 30,
+                letterSpacing: 20,
+                fontWeight: FontWeight.w400,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
