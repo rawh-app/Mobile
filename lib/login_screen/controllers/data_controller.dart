@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import '../services/loginServices.dart';
 
-class LoginController extends GetxController {
+class LoginApiController extends GetxController {
   final Loginservices _loginServices = Loginservices();
 
   var isLoading = false.obs;

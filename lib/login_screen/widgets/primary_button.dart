@@ -11,9 +11,10 @@ class PrimaryButton extends StatelessWidget {
       width: double.infinity,
       height: 55,
       child: ElevatedButton(
-        onPressed:()async{
-          await onPressed;
-        },
+        onPressed:onPressed,
+            //()async{
+          //await onPressed;
+        //},
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2874B9),
           shape: RoundedRectangleBorder(

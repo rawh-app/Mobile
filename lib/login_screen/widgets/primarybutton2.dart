@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PrimaryButton2 extends StatelessWidget {
   final String text;
-  final Future<void> Function() onPressed;
+  final VoidCallback? onPressed;
 
   const PrimaryButton2({super.key, required this.text, required this.onPressed});
 
@@ -12,9 +12,7 @@ class PrimaryButton2 extends StatelessWidget {
       width: double.infinity,
       height: 55,
       child: ElevatedButton(
-        onPressed: () async {
-          await onPressed(); // 🟢 نداء الدالة الصحيح
-        },
+        onPressed: onPressed, // 🟢 نداء الدالة الصحيح
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2874B9),
           shape: RoundedRectangleBorder(

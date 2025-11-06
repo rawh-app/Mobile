@@ -4,6 +4,7 @@ class Loginservices{
   Dio dio=Dio();
   Future<Response>signUp({required String email,required password})async{
     Response response=await dio.post('https://rawh.runasp.net/api/Auth/Login',
+                                    //https://rawh.runasp.net/api/Auth/Login
         data: {
           'email':email,
           'password':password,
