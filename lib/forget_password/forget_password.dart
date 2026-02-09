@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rawh/code_screen/code_screen.dart';
+import 'package:rawh/forget_password/Toast_Helper.dart';
 import 'package:rawh/login_screen/widgets/custom_text_field.dart';
 import 'package:rawh/login_screen/widgets/primary_button.dart';
 import 'package:toastification/toastification.dart';
-import '../Toast_Helper.dart';
+
 import 'cubit/forgetpassword_cubit.dart';
 import 'cubit/forgetpassword_state.dart';
 
@@ -14,6 +15,7 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ForgetPasswordCubit>();
     return BlocProvider(
       create: (_) => ForgetPasswordCubit(),
       child: BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
@@ -25,9 +27,11 @@ class ForgetPassword extends StatelessWidget {
               type: ToastificationType.success,
             );
 
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (_) => const CodeScreen()));
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => CodeScreen(cubit.resetPasswordemail.text),
+              ),
+            );
           } else if (state is ForgetPasswordError) {
             ToastHelper.showToast(
               context: context,
@@ -36,9 +40,8 @@ class ForgetPassword extends StatelessWidget {
             );
           }
         },
-        builder: (context, state) {
-          final cubit = context.read<ForgetPasswordCubit>();
 
+        builder: (context, state) {
           return Directionality(
             textDirection: TextDirection.rtl,
             child: Scaffold(
