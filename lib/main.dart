@@ -5,7 +5,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:rawh/code_screen/cubit/code_screen_cubit.dart';
 import 'package:rawh/confirm_password/cubit/confirm_password_cubit.dart';
 import 'package:rawh/forget_password/cubit/forgetpassword_cubit.dart';
-import 'package:rawh/splash_screen.dart';
+import 'package:rawh/sound/sound_intro.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: SoundIntro(),
     );
   }
 }

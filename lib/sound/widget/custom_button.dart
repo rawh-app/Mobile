@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-class PrimaryButton extends StatelessWidget {
-  final String text;
+class CustomButton extends StatelessWidget {
+  final Widget? child;
   final VoidCallback? onPressed;
   final Color? color;
-  const PrimaryButton({
+  final double borderRadius;
+  const CustomButton({
     super.key,
-    required this.text,
+
+    required this.child,
     required this.onPressed,
     this.color,
+    required this.borderRadius,
   });
 
   @override
@@ -24,17 +27,10 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color ?? const Color(0xFF2874B9),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: Color(0xffEBECEE),
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        child: Center(child: child),
       ),
     );
   }

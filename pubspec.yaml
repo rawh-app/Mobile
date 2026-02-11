@@ -43,6 +43,12 @@ dependencies:
   firebase_auth: ^5.6.2
   flutter_bloc: ^9.1.1
   toastification: ^3.0.3
+  icons_plus: ^5.0.0
+  flutter_sound: ^9.30.0
+  record: ^6.2.0
+  just_audio: ^0.10.5
+  path_provider: ^2.1.5
+  audio_waveforms: ^2.0.2
   
 
 dev_dependencies:
