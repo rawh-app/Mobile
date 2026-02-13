@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rawh/sound/record_services.dart';
 import 'package:rawh/sound/widget/custom_button.dart';
 import 'package:record/record.dart';
 
@@ -537,6 +538,42 @@ class _State extends State<RecordSoundScreen> {
                       ),
                     ),
                   ),
+                  if (_isAudioReady && !_isRecording) ...[
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 60, right: 60),
+                      child: CustomButton(
+                        color: const Color(0xff1E609D),
+                        onPressed: () {
+                          if (_filePath == null) return;
+
+                          print("File path: $_filePath");
+                          ApiService().uploadAudio(filePath: _filePath!);
+                        },
+                        borderRadius: 22,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.send,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              "إرسال",
+                              style: GoogleFonts.tajawal(
+                                letterSpacing: -0.5,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
