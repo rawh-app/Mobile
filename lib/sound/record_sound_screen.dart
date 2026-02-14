@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
@@ -538,15 +539,17 @@ class _State extends State<RecordSoundScreen> {
                       ),
                     ),
                   ),
+
                   if (_isAudioReady && !_isRecording) ...[
                     const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.only(left: 60, right: 60),
                       child: CustomButton(
                         color: const Color(0xff1E609D),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_filePath == null) return;
-
+                          print(_filePath);
+                          print(await File(_filePath!).exists());
                           print("File path: $_filePath");
                           ApiService().uploadAudio(filePath: _filePath!);
                         },
