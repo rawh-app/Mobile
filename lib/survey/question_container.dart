@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class QuestionRadioCard extends StatefulWidget {
   final String question;
   final List<String> options;
   final int initialValue;
   final ValueChanged<int> onChanged;
-  final Widget? child;
-  final VoidCallback? onPressed;
 
   const QuestionRadioCard({
     super.key,
@@ -15,8 +12,6 @@ class QuestionRadioCard extends StatefulWidget {
     required this.options,
     this.initialValue = -1,
     required this.onChanged,
-    this.child,
-    this.onPressed,
   });
 
   @override
@@ -35,7 +30,7 @@ class _QuestionRadioCardState extends State<QuestionRadioCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 290,
       decoration: BoxDecoration(
         color: const Color(0xffFFFFFF),
         borderRadius: BorderRadius.circular(50),
@@ -69,12 +64,7 @@ class _QuestionRadioCardState extends State<QuestionRadioCard> {
             child: Text(
               widget.question,
               textAlign: TextAlign.center,
-              style: GoogleFonts.tajawal(
-                letterSpacing: -0.5,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: const Color.fromARGB(255, 0, 0, 0),
-              ),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -88,36 +78,23 @@ class _QuestionRadioCardState extends State<QuestionRadioCard> {
                 height: 30,
                 child: Row(
                   children: [
-                    RadioTheme(
-                      data: RadioThemeData(
-                        fillColor: MaterialStateProperty.resolveWith<Color>((
-                          states,
-                        ) {
-                          if (states.contains(MaterialState.selected)) {
-                            return Color(0xff5699D5);
-                          }
-                          return Color(0xff5699D5);
-                        }),
-                      ),
-                      child: Radio<int>(
-                        value: index,
-                        groupValue: selectedValue,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                          widget.onChanged(value!);
-                        },
-                      ),
+                    Radio<int>(
+                      value: index,
+                      groupValue: selectedValue,
+                      activeColor: const Color(0xff5699D5),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value!;
+                        });
+                        widget.onChanged(value!);
+                      },
                     ),
                     Expanded(
                       child: Text(
                         widget.options[index],
-                        style: GoogleFonts.tajawal(
-                          letterSpacing: -0.5,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                          color: const Color.fromARGB(255, 0, 0, 0),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -127,14 +104,6 @@ class _QuestionRadioCardState extends State<QuestionRadioCard> {
             );
           }),
           SizedBox(height: 16),
-          if (widget.child != null && widget.onPressed != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: TextButton(
-                onPressed: widget.onPressed,
-                child: widget.child!,
-              ),
-            ),
         ],
       ),
     );

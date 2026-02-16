@@ -1,4 +1,5 @@
 class ChildAssessmentModel {
+  String? id;
   // بيانات الطفل الأساسية
   String? childName;
   String? dateOfBirth;
@@ -32,7 +33,7 @@ class ChildAssessmentModel {
   // أمراض سابقة / حالة القلب
   String? recurrentChestIssues;
   String? heartCondition;
-
+  ChildAssessmentModel();
   // تحويل البيانات إلى JSON عشان تبعتها للـ API
   Map<String, dynamic> toJson() {
     return {
@@ -55,10 +56,39 @@ class ChildAssessmentModel {
       "fatigueStatus": fatigueStatus,
       "appetiteStatus": appetiteStatus,
       "hasWeakCry": hasWeakCry,
-      "hasSevereRunnyNoseWithBreathingDifficulty": hasSevereRunnyNoseWithBreathingDifficulty,
+      "hasSevereRunnyNoseWithBreathingDifficulty":
+          hasSevereRunnyNoseWithBreathingDifficulty,
       "recurrentChestIssues": recurrentChestIssues,
       "heartCondition": heartCondition,
     };
+  }
+
+  factory ChildAssessmentModel.fromJson(Map<String, dynamic> json) {
+    return ChildAssessmentModel()
+      ..id = json['id']?.toString()
+      ..childName = json['childName']
+      ..dateOfBirth = json['dateOfBirth']
+      ..gender = json['gender']
+      ..feverDuration = json['feverDuration']
+      ..feverLevel = json['feverLevel']
+      ..feverResponse = json['feverResponse']
+      ..coughTime = json['coughTime']
+      ..coughType = json['coughType']
+      ..phlegmStatus = json['phlegmStatus']
+      ..coughSeverity = json['coughSeverity']
+      ..hasAbnormalBreathingSound = json['hasAbnormalBreathingSound']
+      ..breathingEffort = json['breathingEffort']
+      ..feedingAbility = json['feedingAbility']
+      ..hasChestIndrawing = json['hasChestIndrawing']
+      ..hasNasalFlaring = json['hasNasalFlaring']
+      ..hasCyanosis = json['hasCyanosis']
+      ..fatigueStatus = json['fatigueStatus']
+      ..appetiteStatus = json['appetiteStatus']
+      ..hasWeakCry = json['hasWeakCry']
+      ..hasSevereRunnyNoseWithBreathingDifficulty =
+          json['hasSevereRunnyNoseWithBreathingDifficulty']
+      ..recurrentChestIssues = json['recurrentChestIssues']
+      ..heartCondition = json['heartCondition'];
   }
 }
 

@@ -49,6 +49,7 @@ dependencies:
   just_audio: ^0.10.5
   path_provider: ^2.1.5
   audio_waveforms: ^2.0.2
+  get_storage: ^2.1.1
   
 
 dev_dependencies:
