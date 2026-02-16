@@ -50,6 +50,7 @@ dependencies:
   path_provider: ^2.1.5
   audio_waveforms: ^2.0.2
   get_storage: ^2.1.1
+  flutter_unity: ^0.3.0
   
 
 dev_dependencies:
